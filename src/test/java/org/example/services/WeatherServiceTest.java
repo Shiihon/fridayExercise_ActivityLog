@@ -1,16 +1,11 @@
 package org.example.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.example.dtos.CityInfoDTO;
 import org.example.dtos.CurrentDataDTO;
-import org.example.dtos.MunicipalityDTO;
 import org.example.dtos.WeatherInfoDTO;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

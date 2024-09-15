@@ -1,8 +1,9 @@
 package org.example.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.EntityManagerFactory;
+import org.example.config.HibernateConfig;
 import org.example.dtos.*;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,11 +26,12 @@ class ActivityServiceTest {
 
     @BeforeAll
     static void beforeAll() {
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("activity_loggin");
         ObjectMapper objectMapper = new ObjectMapper();
         WeatherService ws = new WeatherService(objectMapper);
         CityService cs = new CityService(objectMapper);
 
-        activityService = new ActivityService(ws, cs);
+        activityService = new ActivityService(ws, cs, emf);
     }
 
     @BeforeEach

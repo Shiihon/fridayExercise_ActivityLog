@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.persistence.EntityManagerFactory;
 import org.example.config.HibernateConfig;
 import org.example.dtos.ActivityDTO;
-import org.example.dtos.WeatherInfoDTO;
 import org.example.services.ActivityService;
 import org.example.services.CityService;
 import org.example.services.WeatherService;
@@ -21,13 +20,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory("activity_logging");
        WeatherService weatherService = new WeatherService(new ObjectMapper());
 //        System.out.println(weatherService.getWeather("Rødovre"));
 
         CityService cityService = new CityService(new ObjectMapper());
 //        System.out.println(cityService.getCityInfoFromApi("Roskilde"));
 
-        ActivityService activityService = new ActivityService(weatherService, cityService);
+        ActivityService activityService = new ActivityService(weatherService, cityService, emf);
        ActivityDTO createdActivity = activityService.createActivity(LocalDate.now(), "Run", LocalTime.now(), Duration.ofMinutes(30), 5.0, "No comment", "Roskilde");
        System.out.println(createdActivity);
     }
